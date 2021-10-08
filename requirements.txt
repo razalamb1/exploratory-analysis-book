@@ -1,0 +1,6 @@
+boto3
+ipython
+pylint
+pytest
+black
+nltk
