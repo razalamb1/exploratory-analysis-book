@@ -33,13 +33,19 @@ def chapter_sentiment(chapter):
     return sentiment.to_dict()
     
 
-chapters = chapters[0:4]
 final = pd.DataFrame(columns =  ['Chapter','Positive', 'Negative', 'Neutral', 'Mixed'])
 for i in range(len(chapters)):
     sentiment = chapter_sentiment(chapters[i])
-    sentiment['Chapter'] = f'Chapter {i}'
+    sentiment['Chapter'] = f'{i}'
     final = final.append(sentiment, ignore_index=True)
     pass
-fig, ax = plt.subplots(1, 1)
-fig= final.plot.line()
-fig.savefig('test.svg')
+
+plt.plot(final['Chapter'], final['Positive'], label = "Positive")
+plt.plot(final['Chapter'], final['Negative'], label = "Negative")
+plt.plot(final['Chapter'], final['Neutral'], label = "Neutral")
+plt.plot(final['Chapter'], final['Mixed'], label = "Mixed")
+plt.xlabel("Chapter")
+plt.ylabel("Proportion")
+plt.title("Sentiment Analysis by Chapter")
+plt.legend()
+plt.savefig('display.png')
